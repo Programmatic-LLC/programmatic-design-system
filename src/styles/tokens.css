@@ -1,0 +1,88 @@
+:root {
+	--ds-brand-50: #ecfdf6;
+	--ds-brand-100: #cdf6e8;
+	--ds-brand-200: #9fead2;
+	--ds-brand-300: #66d7b8;
+	--ds-brand-400: #30bd9a;
+	--ds-brand-500: #16a085;
+	--ds-brand-600: #158474;
+	--ds-brand-700: #115e52;
+	--ds-brand-800: #0d4a40;
+	--ds-brand-900: #0a3a33;
+	--ds-brand-950: #052420;
+
+	--ds-neutral-0: #ffffff;
+	--ds-neutral-50: #f8fafc;
+	--ds-neutral-100: #f1f5f9;
+	--ds-neutral-200: #e2e8f0;
+	--ds-neutral-300: #cbd5e1;
+	--ds-neutral-400: #94a3b8;
+	--ds-neutral-500: #64748b;
+	--ds-neutral-600: #475569;
+	--ds-neutral-700: #334155;
+	--ds-neutral-800: #1e293b;
+	--ds-neutral-900: #0f172a;
+	--ds-neutral-950: #020617;
+
+	--ds-success: #16a34a;
+	--ds-success-surface: #dcfce7;
+	--ds-success-strong: #15803d;
+	--ds-warning: #ca8a04;
+	--ds-warning-surface: #fef9c3;
+	--ds-warning-strong: #a16207;
+	--ds-danger: #dc2626;
+	--ds-danger-surface: #fee2e2;
+	--ds-danger-strong: #b91c1c;
+	--ds-info: #2563eb;
+	--ds-info-surface: #dbeafe;
+	--ds-info-strong: #1d4ed8;
+
+	--ds-bg: var(--ds-neutral-0);
+	--ds-surface: var(--ds-neutral-0);
+	--ds-surface-subtle: var(--ds-neutral-50);
+	--ds-surface-muted: var(--ds-neutral-100);
+	--ds-border: var(--ds-neutral-200);
+	--ds-border-strong: var(--ds-neutral-500);
+	--ds-text: var(--ds-neutral-900);
+	--ds-text-muted: var(--ds-neutral-500);
+	--ds-text-subtle: var(--ds-neutral-500);
+	--ds-text-on-brand: #ffffff;
+	--ds-ring: var(--ds-brand-500);
+
+	--ds-radius-sm: 0.375rem;
+	--ds-radius-md: 0.5rem;
+	--ds-radius-lg: 0.75rem;
+	--ds-radius-xl: 1rem;
+	--ds-radius-full: 9999px;
+}
+
+@keyframes ds-shimmer {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+.dark {
+	--ds-bg: var(--ds-neutral-950);
+	--ds-surface: var(--ds-neutral-900);
+	--ds-surface-subtle: var(--ds-neutral-800);
+	--ds-surface-muted: var(--ds-neutral-800);
+	--ds-border: var(--ds-neutral-800);
+	--ds-border-strong: var(--ds-neutral-700);
+	--ds-text: var(--ds-neutral-50);
+	--ds-text-muted: var(--ds-neutral-400);
+	--ds-text-subtle: var(--ds-neutral-500);
+	--ds-text-on-brand: #ffffff;
+	--ds-ring: var(--ds-brand-400);
+}
