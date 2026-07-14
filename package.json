@@ -1,13 +1,11 @@
 {
 	"name": "programmatic-design-system",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "DestinationHub design system: atoms, components, layouts, and templates shared across Programmatic applications",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"sideEffects": [
-		"**/*.css"
-	],
+	"sideEffects": true,
 	"files": [
 		"dist"
 	],

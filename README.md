@@ -33,7 +33,17 @@ Components are styled with Tailwind utility classes. Consumers must tell Tailwin
 @source "../node_modules/programmatic-design-system/dist";
 ```
 
-Design tokens ship with the package and are imported automatically by the root barrel (`styles/tokens.css`).
+### Design tokens
+
+Every component resolves its colors, radii, and typography through `--ds-*` CSS variables defined in `dist/styles/tokens.css`. The root barrel imports it as a side effect and the package declares `"sideEffects": true` so bundlers preserve that import.
+
+Some build pipelines still drop side-effect CSS from `node_modules` packages (Next 15 webpack does unless the package is listed in `transpilePackages`). Import the tokens explicitly in your app's CSS entry to be safe:
+
+```css
+@import "../node_modules/programmatic-design-system/dist/styles/tokens.css";
+```
+
+If the tokens are missing you will see it immediately: transparent modals and dropdowns, unstyled inputs, and colorless buttons, because every `var(--ds-*)` reference resolves to nothing. When debugging, check the built CSS for token *definitions* (`--ds-brand-600:`), not just usages (`var(--ds-brand-600)`).
 
 ### Link component injection
 
