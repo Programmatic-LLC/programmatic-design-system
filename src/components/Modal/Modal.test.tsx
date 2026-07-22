@@ -205,7 +205,7 @@ describe('Modal', () => {
 		);
 		const panel = screen.getByRole('dialog').querySelector('.max-w-5xl');
 		expect(panel).not.toBeNull();
-		expect(panel).toHaveClass('h-[90vh]');
+		expect(panel).toHaveClass('h-[90dvh]');
 	});
 
 	it('renders as a bottom sheet', () => {
