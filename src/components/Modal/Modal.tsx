@@ -21,8 +21,8 @@ const panelVariants = cva(
 				full: 'max-w-full',
 			},
 			height: {
-				auto: 'max-h-[90vh]',
-				tall: 'h-[90vh] max-h-[90vh]',
+				auto: 'max-h-[90dvh]',
+				tall: 'h-[90dvh] max-h-[90dvh]',
 			},
 		},
 		defaultVariants: { size: 'md', height: 'auto' },
@@ -128,7 +128,7 @@ export function Modal({
 		};
 
 	const sheetPanelClasses =
-		'pointer-events-auto relative isolate flex w-full max-h-[90vh] flex-col overflow-hidden rounded-t-[var(--ds-radius-xl)] bg-[var(--ds-surface)] shadow-[0_-12px_40px_-12px_rgba(15,23,42,0.25)] ring-1 ring-black/5 pb-[env(safe-area-inset-bottom)] focus:outline-none';
+		'pointer-events-auto relative isolate flex w-full max-h-[90dvh] flex-col overflow-hidden rounded-t-[var(--ds-radius-xl)] bg-[var(--ds-surface)] shadow-[0_-12px_40px_-12px_rgba(15,23,42,0.25)] ring-1 ring-black/5 pb-[env(safe-area-inset-bottom)] focus:outline-none';
 
 	const portalStyle: CSSProperties = brandVars ?? {};
 
@@ -138,7 +138,7 @@ export function Modal({
 				<motion.div
 					{...overlayAnim}
 					className={cn(
-						'fixed inset-0 z-[60] flex justify-center',
+						'fixed inset-0 z-[60] flex h-[100dvh] justify-center',
 						asSheet ? 'items-end' : 'items-center p-4',
 					)}
 					aria-modal="true"
