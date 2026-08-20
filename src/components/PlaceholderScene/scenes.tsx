@@ -428,3 +428,41 @@ export function RetailScene() {
 		</svg>
 	);
 }
+
+export function ParkScene() {
+	return (
+		<svg {...SVG_PROPS}>
+			<rect x="0" y="0" width="240" height="78" fill="#DCDCDC" />
+			<rect x="0" y="72" width="240" height="76" fill="#D2D2D2" />
+			<ellipse cx="46" cy="73" rx="94" ry="17" fill="#D8D8D8" />
+			<ellipse cx="198" cy="73" rx="84" ry="14" fill="#D6D6D6" />
+			<path
+				d="M 86 148 Q 104 116 106 96 Q 107 82 117 76 L 131 76 Q 123 84 122 98 Q 124 120 140 148 Z"
+				fill="#DEDEDE"
+			/>
+			<rect x="196" y="86" width="9" height="32" rx="2" fill="#C8C8C8" />
+			<ellipse cx="200" cy="78" rx="22" ry="19" fill="#C4C4C4" />
+			<rect x="152" y="86" width="5" height="32" rx="1" fill="#C4C4C4" />
+			<rect x="181" y="86" width="5" height="32" rx="1" fill="#C4C4C4" />
+			<path d="M 146 88 L 192 88 L 169 66 Z" fill="#C8C8C8" />
+			<rect x="160" y="102" width="18" height="4" rx="1" fill="#BEBEBE" />
+			<rect x="162" y="106" width="3" height="12" rx="1" fill="#BEBEBE" />
+			<rect x="173" y="106" width="3" height="12" rx="1" fill="#BEBEBE" />
+			<rect x="40" y="78" width="12" height="44" rx="3" fill="#C2C2C2" />
+			<ellipse cx="46" cy="64" rx="32" ry="26" fill="#BEBEBE" />
+			<ellipse cx="26" cy="74" rx="17" ry="14" fill="#C4C4C4" />
+			<ellipse cx="66" cy="72" rx="15" ry="13" fill="#C4C4C4" />
+			<rect x="58" y="104" width="40" height="5" rx="2" fill="#BEBEBE" />
+			<rect x="58" y="94" width="40" height="4" rx="2" fill="#C4C4C4" />
+			<rect x="62" y="109" width="4" height="13" rx="1" fill="#B8B8B8" />
+			<rect x="90" y="109" width="4" height="13" rx="1" fill="#B8B8B8" />
+			<rect x="62" y="98" width="3" height="8" rx="1" fill="#C0C0C0" />
+			<rect x="91" y="98" width="3" height="8" rx="1" fill="#C0C0C0" />
+			<rect x="127" y="70" width="3" height="50" rx="1.5" fill="#C8C8C8" />
+			<circle cx="128.5" cy="66" r="6" fill="#CECECE" />
+			<rect x="122" y="118" width="14" height="4" rx="1" fill="#C0C0C0" />
+			<ellipse cx="14" cy="126" rx="16" ry="9" fill="#C8C8C8" />
+			<ellipse cx="212" cy="132" rx="20" ry="10" fill="#CACACA" />
+		</svg>
+	);
+}

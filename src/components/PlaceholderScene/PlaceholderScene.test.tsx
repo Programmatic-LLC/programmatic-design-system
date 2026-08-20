@@ -11,6 +11,7 @@ import {
 	HistoricalSiteScene,
 	LodgingScene,
 	OrganizationScene,
+	ParkScene,
 	PublicArtScene,
 	RetailScene,
 	TopicPageScene,
@@ -26,6 +27,7 @@ const mappedTypes = [
 	'event',
 	'public_art',
 	'trail',
+	'park',
 	'community_partner',
 	'retail',
 ];
@@ -54,6 +56,7 @@ describe('scenes', () => {
 		['GameScene', GameScene],
 		['TourScene', TourScene],
 		['TrailScene', TrailScene],
+		['ParkScene', ParkScene],
 		['CommunityPartnerScene', CommunityPartnerScene],
 		['EventScene', EventScene],
 		['PublicArtScene', PublicArtScene],

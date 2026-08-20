@@ -6,6 +6,7 @@ import {
 	EventScene,
 	HistoricalSiteScene,
 	LodgingScene,
+	ParkScene,
 	PublicArtScene,
 	RetailScene,
 	TrailScene,
@@ -19,6 +20,7 @@ const ENTITY_SCENES: Record<string, () => ReactNode> = {
 	event: EventScene,
 	public_art: PublicArtScene,
 	trail: TrailScene,
+	park: ParkScene,
 	community_partner: CommunityPartnerScene,
 	retail: RetailScene,
 };
