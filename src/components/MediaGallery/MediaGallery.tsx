@@ -148,11 +148,15 @@ function MediaFrame({
 	objectFit,
 	loading,
 	onLoad,
+	interactivePanorama = true,
+	onExplorePanorama,
 }: {
 	item: MediaGalleryItem;
 	objectFit: 'cover' | 'contain';
 	loading?: 'lazy' | 'eager';
 	onLoad?: (event: SyntheticEvent<HTMLImageElement>) => void;
+	interactivePanorama?: boolean;
+	onExplorePanorama?: () => void;
 }) {
 	const sharedImgClass = 'absolute inset-0 h-full w-full select-none';
 	const sharedStyle = { objectFit, objectPosition: 'center' as const };
@@ -160,7 +164,46 @@ function MediaFrame({
 	const captionsTrackUrl = useVttTrackUrl(item.video ? item.captionsVtt : undefined);
 
 	if (item.panorama) {
-		return <PanoramaViewer src={item.panorama.src} alt={item.alt} />;
+		if (interactivePanorama) {
+			return (
+				<PanoramaViewer
+					src={item.panorama.src}
+					alt={item.alt}
+					fallbackSrc={item.thumbnailSrc ?? item.src}
+				/>
+			);
+		}
+
+		return (
+			<>
+				<img
+					src={item.src}
+					srcSet={item.srcSet}
+					sizes={item.sizes}
+					alt={item.alt}
+					loading={loading}
+					decoding="async"
+					draggable={false}
+					onLoad={onLoad}
+					className={sharedImgClass}
+					style={sharedStyle}
+				/>
+				<span
+					aria-hidden="true"
+					className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"
+				/>
+				<div className="absolute inset-0 z-10 grid place-items-center">
+					<button
+						type="button"
+						onClick={onExplorePanorama}
+						className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-medium text-[var(--ds-text)] shadow-[0_2px_10px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-transform duration-200 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ds-ring)]"
+					>
+						<Rotate3d className="h-4 w-4" aria-hidden="true" />
+						Explore in 360°
+					</button>
+				</div>
+			</>
+		);
 	}
 
 	const embedSrc = buildEmbedSrc(item.embed);
@@ -379,6 +422,8 @@ export function MediaGallery({
 
 	const lightboxOpen = lightboxIndex !== null;
 	const useBuiltInLightbox = !onTileClick && !disableLightbox;
+	const tilesAreInteractive = !!onTileClick || useBuiltInLightbox;
+	const panoramaOpensLightbox = tilesAreInteractive;
 
 	const handleTileClick = useCallback(
 		(i: number) => {
@@ -569,6 +614,10 @@ export function MediaGallery({
 						item={current}
 						objectFit={itemFit}
 						loading="eager"
+						interactivePanorama={!panoramaOpensLightbox}
+						onExplorePanorama={
+							panoramaOpensLightbox ? () => handleTileClick(safeIndex) : undefined
+						}
 						onLoad={(event) => {
 							const img = event.currentTarget;
 							if (!img.naturalWidth || !img.naturalHeight) return;
@@ -628,8 +677,6 @@ export function MediaGallery({
 			)}
 		</div>
 	);
-
-	const tilesAreInteractive = !!onTileClick || useBuiltInLightbox;
 
 	const mosaicGrid = editorialVariant === 'five-plus' ? (
 		<div className="grid h-full w-full grid-cols-4 grid-rows-2 gap-1.5">
