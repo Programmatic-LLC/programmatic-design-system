@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { MediaGallery, type MediaGalleryItem } from './MediaGallery';
 
@@ -250,11 +251,33 @@ describe('MediaGallery media frames', () => {
 		expect(screen.getByAltText('Bad embed')).toHaveAttribute('src', '/e.jpg');
 	});
 
-	it('renders a panorama viewer', () => {
+	it('shows a flat preview with an explore control instead of mounting the viewer in the carousel', () => {
 		render(
-			<MediaGallery items={[{ src: '/p.jpg', alt: 'Round', panorama: { src: '/p.jpg' } }]} />,
+			<MediaGallery items={[{ src: '/p.jpg', alt: 'Round', panorama: { src: '/pano.jpg' } }]} />,
+		);
+		expect(screen.queryByTestId('panorama-viewer')).not.toBeInTheDocument();
+		expect(screen.getByAltText('Round')).toHaveAttribute('src', '/p.jpg');
+		expect(screen.getByRole('button', { name: 'Explore in 360°' })).toBeInTheDocument();
+	});
+
+	it('mounts the panorama viewer in the lightbox once the explore control is used', async () => {
+		const user = userEvent.setup();
+		render(
+			<MediaGallery items={[{ src: '/p.jpg', alt: 'Round', panorama: { src: '/pano.jpg' } }]} />,
+		);
+		await user.click(screen.getByRole('button', { name: 'Explore in 360°' }));
+		expect(screen.getByTestId('panorama-viewer')).toBeInTheDocument();
+	});
+
+	it('mounts the panorama viewer inline when no lightbox is available', () => {
+		render(
+			<MediaGallery
+				items={[{ src: '/p.jpg', alt: 'Round', panorama: { src: '/pano.jpg' } }]}
+				disableLightbox
+			/>,
 		);
 		expect(screen.getByTestId('panorama-viewer')).toBeInTheDocument();
+		expect(screen.queryByRole('button', { name: 'Explore in 360°' })).not.toBeInTheDocument();
 	});
 
 	it('renders picture sources when provided', () => {

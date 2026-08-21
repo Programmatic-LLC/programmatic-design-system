@@ -25,3 +25,11 @@ export const Default: Story = {
 		alt: 'Interactive 360 degree panorama',
 	},
 };
+
+export const FailedToLoad: Story = {
+	args: {
+		src: 'https://example.invalid/missing-panorama.jpg',
+		alt: 'Interactive 360 degree panorama',
+		fallbackSrc: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere-small.jpg',
+	},
+};
