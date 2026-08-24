@@ -299,3 +299,32 @@ export const EditorialFallsBackToCarousel: Story = {
 		layout: 'editorial',
 	},
 };
+
+const fullSourceItems = [
+	{
+		src: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=480&h=270&q=80&auto=format&fit=crop',
+		fullSrc: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1600&q=85&auto=format',
+		alt: 'Stone tower rising above the trees',
+		caption: 'Tile is a tight 16:9 crop — open it to see the whole photo',
+	},
+	{
+		src: 'https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=480&h=270&q=80&auto=format&fit=crop',
+		fullSrc: 'https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=1600&q=85&auto=format',
+		alt: 'A narrow alleyway in old town',
+		caption: 'Cobbled alley — Old Town',
+	},
+	{
+		src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=480&h=270&q=80&auto=format&fit=crop',
+		alt: 'Aerial view of the valley',
+		caption: 'No full source — the lightbox shows the standard image',
+	},
+];
+
+export const RetainedOriginalInLightbox: Story = {
+	name: 'Full source — original shown in the lightbox',
+	args: {
+		items: fullSourceItems,
+		aspectRatio: '16/9',
+		layout: 'editorial',
+	},
+};

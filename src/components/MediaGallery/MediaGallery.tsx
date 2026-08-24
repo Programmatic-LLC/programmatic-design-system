@@ -43,6 +43,7 @@ export interface MediaPanorama {
 
 export interface MediaGalleryItem {
 	src: string;
+	fullSrc?: string;
 	alt: string;
 	caption?: ReactNode;
 	attribution?: ReactNode;
@@ -150,6 +151,7 @@ function MediaFrame({
 	onLoad,
 	interactivePanorama = true,
 	onExplorePanorama,
+	useFullSource = false,
 }: {
 	item: MediaGalleryItem;
 	objectFit: 'cover' | 'contain';
@@ -157,9 +159,15 @@ function MediaFrame({
 	onLoad?: (event: SyntheticEvent<HTMLImageElement>) => void;
 	interactivePanorama?: boolean;
 	onExplorePanorama?: () => void;
+	useFullSource?: boolean;
 }) {
 	const sharedImgClass = 'absolute inset-0 h-full w-full select-none';
 	const sharedStyle = { objectFit, objectPosition: 'center' as const };
+
+	const showFullSource = useFullSource && !!item.fullSrc;
+	const imageSrc = showFullSource ? item.fullSrc! : item.src;
+	const imageSrcSet = showFullSource ? undefined : item.srcSet;
+	const imageSizes = showFullSource ? undefined : item.sizes;
 
 	const captionsTrackUrl = useVttTrackUrl(item.video ? item.captionsVtt : undefined);
 
@@ -251,7 +259,7 @@ function MediaFrame({
 		);
 	}
 
-	if (item.sources && item.sources.length > 0) {
+	if (!showFullSource && item.sources && item.sources.length > 0) {
 		return (
 			<picture>
 				{item.sources.map((source, index) => (
@@ -280,9 +288,9 @@ function MediaFrame({
 
 	return (
 		<img
-			src={item.src}
-			srcSet={item.srcSet}
-			sizes={item.sizes}
+			src={imageSrc}
+			srcSet={imageSrcSet}
+			sizes={imageSizes}
 			alt={item.alt}
 			loading={loading}
 			decoding="async"
@@ -817,7 +825,12 @@ export function MediaGallery({
 						transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
 						className="relative h-full max-h-[80vh] w-full max-w-6xl"
 					>
-						<MediaFrame item={lightboxItem} objectFit="contain" loading="eager" />
+						<MediaFrame
+							item={lightboxItem}
+							objectFit="contain"
+							loading="eager"
+							useFullSource
+						/>
 					</motion.div>
 				</AnimatePresence>
 
