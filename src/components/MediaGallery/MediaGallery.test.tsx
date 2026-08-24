@@ -465,6 +465,63 @@ describe('MediaGallery lightbox', () => {
 		expect(document.body.style.overflow).toBe('');
 	});
 
+	it('shows the full-resolution source in the lightbox while the tile keeps the derivative', () => {
+		render(
+			<MediaGallery
+				items={[{ src: '/card.jpg', fullSrc: '/master.jpg', alt: 'Statue' }, ...images]}
+				layout="editorial"
+			/>,
+		);
+
+		for (const tile of screen.getAllByAltText('Statue')) {
+			expect(tile).toHaveAttribute('src', '/card.jpg');
+		}
+
+		fireEvent.click(screen.getByRole('button', { name: 'View Statue' }));
+
+		const dialog = screen.getByRole('dialog', { name: 'Media viewer' });
+		expect(within(dialog).getByAltText('Statue')).toHaveAttribute('src', '/master.jpg');
+	});
+
+	it('ignores the derivative srcSet once the full source is shown', () => {
+		render(
+			<MediaGallery
+				items={[
+					{
+						src: '/card.jpg',
+						fullSrc: '/master.jpg',
+						srcSet: '/card-2x.jpg 2x',
+						sizes: '100vw',
+						alt: 'Statue',
+					},
+					...images,
+				]}
+				layout="editorial"
+			/>,
+		);
+
+		fireEvent.click(screen.getByRole('button', { name: 'View Statue' }));
+
+		const lightboxImage = within(screen.getByRole('dialog', { name: 'Media viewer' }))
+			.getByAltText('Statue');
+		expect(lightboxImage).not.toHaveAttribute('srcset');
+		expect(lightboxImage).not.toHaveAttribute('sizes');
+	});
+
+	it('falls back to the standard source when no full source is supplied', () => {
+		render(
+			<MediaGallery
+				items={[{ src: '/card.jpg', alt: 'Statue' }, ...images]}
+				layout="editorial"
+			/>,
+		);
+
+		fireEvent.click(screen.getByRole('button', { name: 'View Statue' }));
+
+		const dialog = screen.getByRole('dialog', { name: 'Media viewer' });
+		expect(within(dialog).getByAltText('Statue')).toHaveAttribute('src', '/card.jpg');
+	});
+
 	it('supports keyboard navigation and Escape', () => {
 		render(<MediaGallery items={images} layout="editorial" />);
 		fireEvent.click(screen.getByRole('button', { name: 'View First' }));
