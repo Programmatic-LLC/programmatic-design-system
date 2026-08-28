@@ -43,6 +43,33 @@ describe('Disclosure', () => {
 		expect(container.querySelector('details')).toHaveClass('bg-white/10');
 	});
 
+	it('draws the default tone focus indicator inside the summary so the panel cannot clip it', () => {
+		const { container } = render(<Disclosure label="Transcript">Body</Disclosure>);
+		const summary = container.querySelector('summary');
+		expect(summary).toHaveClass('focus-visible:outline-2');
+		expect(summary).toHaveClass('focus-visible:-outline-offset-2');
+		expect(summary).toHaveClass('focus-visible:outline-[var(--ds-ring)]');
+	});
+
+	it('draws the onDark tone focus indicator inside the summary', () => {
+		const { container } = render(
+			<Disclosure label="Transcript" tone="onDark">
+				Body
+			</Disclosure>,
+		);
+		const summary = container.querySelector('summary');
+		expect(summary).toHaveClass('focus-visible:outline-2');
+		expect(summary).toHaveClass('focus-visible:-outline-offset-2');
+		expect(summary).toHaveClass('focus-visible:outline-white/70');
+	});
+
+	it('keeps a focus indicator rather than suppressing the outline', () => {
+		const { container } = render(<Disclosure label="Transcript">Body</Disclosure>);
+		const summary = container.querySelector('summary');
+		expect(summary).not.toHaveClass('focus-visible:outline-none');
+		expect(summary?.className).not.toMatch(/focus-visible:ring/);
+	});
+
 	it('merges a custom class onto the details element', () => {
 		const { container } = render(
 			<Disclosure label="Transcript" className="custom-class">
