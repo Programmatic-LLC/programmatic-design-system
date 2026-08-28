@@ -63,6 +63,22 @@ describe('Disclosure', () => {
 		expect(summary).toHaveClass('focus-visible:outline-white/70');
 	});
 
+	it('rounds the summary to the panel radius so the focus outline is not clipped at the corners', () => {
+		const { container } = render(<Disclosure label="Transcript">Body</Disclosure>);
+		const summary = container.querySelector('summary');
+		expect(summary).toHaveClass('rounded-[var(--ds-radius-md)]');
+		expect(summary).toHaveClass('group-open:rounded-b-none');
+	});
+
+	it('rounds the onDark summary to the panel radius as well', () => {
+		const { container } = render(
+			<Disclosure label="Transcript" tone="onDark">
+				Body
+			</Disclosure>,
+		);
+		expect(container.querySelector('summary')).toHaveClass('rounded-[var(--ds-radius-md)]');
+	});
+
 	it('keeps a focus indicator rather than suppressing the outline', () => {
 		const { container } = render(<Disclosure label="Transcript">Body</Disclosure>);
 		const summary = container.querySelector('summary');

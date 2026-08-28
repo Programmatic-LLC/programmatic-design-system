@@ -30,7 +30,7 @@ export function Disclosure({
 		>
 			<summary
 				className={cn(
-					'flex cursor-pointer list-none items-center justify-between gap-2 px-3 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:-outline-offset-2',
+					'flex cursor-pointer list-none items-center justify-between gap-2 rounded-[var(--ds-radius-md)] px-3 py-2 text-sm font-medium group-open:rounded-b-none focus-visible:outline-2 focus-visible:-outline-offset-2',
 					onDark
 						? 'text-white focus-visible:outline-white/70'
 						: 'text-[var(--ds-brand-600)] focus-visible:outline-[var(--ds-ring)]',
